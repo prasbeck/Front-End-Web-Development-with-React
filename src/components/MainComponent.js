@@ -4,6 +4,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
+import About from './AboutComponent';
 import Contact from './ContactComponent';
 import Dishdetail from './DishdetailComponent';
 
@@ -22,12 +23,12 @@ class Main extends Component {
       comments: COMMENTS,
       promotions: PROMOTIONS,
       leaders: LEADERS,
-      selectedDish: null
+     // selectedDish: null
     };
   }
-  onDishSelect(dishId) {
+  /*onDishSelect(dishId) {
     this.setState({ selectedDish: dishId});
-  }
+  }*/
   
   render(){
     const DishWithId = ({match}) => {
@@ -52,6 +53,7 @@ class Main extends Component {
           <Route path="/home" component={HomePage} />
           <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
           <Route path='/menu/:dishId' component={DishWithId} />
+          <Route path='/aboutus' component={() => <About leaders={this.state.leaders} />} />
           <Route exact path='/contactus' component={Contact} />
           <Redirect to="/home" />
         </Switch>
