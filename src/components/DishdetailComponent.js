@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Loading } from './LoadingComponent';
 import { Card, CardImg, CardText, CardBody,
    CardTitle, Breadcrumb, BreadcrumbItem,  Button, Modal, ModalBody, ModalHeader, Label, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -189,7 +190,25 @@ function RenderComments({comments,addComment, dishId}) {
 }
         
 const Dishdetail = (props) => {
-   if (props.dish != null) {
+   if (props.isLoading) {
+      return(
+          <div className="container">
+              <div className="row">            
+                  <Loading />
+              </div>
+          </div>
+      );
+  }
+  else if (props.errMess) {
+      return(
+          <div className="container">
+              <div className="row">            
+                  <h4>{props.errMess}</h4>
+              </div>
+          </div>
+      );
+  }
+   else if (props.dish != null) {
       return (
          <div className="container">
             <div className="row">
@@ -204,7 +223,7 @@ const Dishdetail = (props) => {
                </div>
             </div>
             <div className="row">
-               <RenderDish dish ={props.dish} />
+               <RenderDish dish={props.dish} />
                <RenderComments comments={props.comments} addComment={props.addComment}
                   dishId={props.dish.id} />
             </div>
